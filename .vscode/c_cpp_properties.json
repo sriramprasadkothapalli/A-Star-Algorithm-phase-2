@@ -1,0 +1,55 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/galactic/include/**",
+        "/home/sriram/809_final_backup/backup/group27_final/include/**",
+        "/home/sriram/809_final_backup/backup/group29_final/include/**",
+        "/home/sriram/Downloads/final_working_v3/src/final_project/include/**",
+        "/home/sriram/Downloads/final_working_v3/src/group15/include/**",
+        "/home/sriram/Downloads/group15_final (1)/group15_final/include/**",
+        "/home/sriram/Downloads/group15_final-4 (1)/group15_final/include/**",
+        "/home/sriram/Downloads/group27_final (1)/group27_final/include/**",
+        "/home/sriram/Downloads/group29_final/include/**",
+        "/home/sriram/Downloads/rwa3_ws/turtlebot3_sensors/include/**",
+        "/home/sriram/Downloads/rwa3_ws/turtlebot3_simulations/turtlebot3_fake_node/include/**",
+        "/home/sriram/Downloads/rwa3_ws/turtlebot3_simulations/turtlebot3_gazebo/include/**",
+        "/home/sriram/backup/group27_final/include/**",
+        "/home/sriram/backup/rover_backup_0412/include/**",
+        "/home/sriram/final_ws/src/final_project/include/**",
+        "/home/sriram/final_ws/src/group27_final/include/**",
+        "/home/sriram/final_ws_1/src/final_project/include/**",
+        "/home/sriram/final_ws_1/src/group27_final/include/**",
+        "/home/sriram/group27_final (1)/group27_final/include/**",
+        "/home/sriram/my_package/include/**",
+        "/home/sriram/new/ﬁnal_ws/src/final_project/include/**",
+        "/home/sriram/project3_ws/src/turtlebot3_project3/include/**",
+        "/home/sriram/ros2_ws/src/rover/include/**",
+        "/home/sriram/ros2_ws/src/toy_car/include/**",
+        "/home/sriram/ros809y_ws/src/first_package/include/**",
+        "/home/sriram/rwa3_ws/src/turtlebot3_sensors/include/**",
+        "/home/sriram/rwa3_ws/src/turtlebot3_simulations/turtlebot3_fake_node/include/**",
+        "/home/sriram/rwa3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/include/**",
+        "/home/sriram/src/final_project/include/**",
+        "/home/sriram/testWS/src/turtlebot3/turtlebot3/turtlebot3_node/include/**",
+        "/home/sriram/testWS/src/turtlebot3/turtlebot3_simulations/turtlebot3_fake_node/include/**",
+        "/home/sriram/testWS/src/turtlebot3/turtlebot3_simulations/turtlebot3_gazebo/include/**",
+        "/home/sriram/testWS/src/utils/DynamixelSDK/dynamixel_sdk/include/**",
+        "/home/sriram/testWS/src/utils/DynamixelSDK/dynamixel_sdk_examples/include/**",
+        "/home/sriram/testWS/src/utils/hls_lfcd_lds_driver/include/**",
+        "/home/sriram/testWS/src/utils/ld08_driver/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

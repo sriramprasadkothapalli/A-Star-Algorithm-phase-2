@@ -5,8 +5,8 @@ import cv2
 import math
 import time
 import heapq
-
-# Node class
+import csv
+# Node class 
 class createNode :
     def __init__ (self, pos, theta, parent, cost, euclidean):
         """
@@ -267,6 +267,13 @@ def reached_goal(point,goal, threshold):
 def euclidean(point1, point2):
     return math.sqrt((point1[0] - point2[0])**2 + (point1[1] - point2[1])**2)
 
+
+def save_values_to_csv(velocities,orientation, file_name='values.csv'):
+    with open(file_name, mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['Velocity','Orientation'])  # Writing header
+        for vel,angle in zip(velocities,orientation):
+            writer.writerow([vel, angle])
 # A* Algorithm
 def a_star(start_position, end_position, start_orientation):
     # Initialize lists
@@ -358,8 +365,9 @@ if __name__ == "__main__":
     draw_scene(clearance)
     print("Start search")
     path, orientation = a_star(initial, final, initial_orientation)
-
+    orientation = [-angle for angle in orientation]
     velocities = get_velocity(path)
+    save_values_to_csv(velocities, orientation)
 
 
     # Visualize start and goal nodes
