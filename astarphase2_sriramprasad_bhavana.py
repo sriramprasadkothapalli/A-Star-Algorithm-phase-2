@@ -8,7 +8,7 @@ import heapq
 import csv
 # Node class 
 class createNode :
-    def __init__ (self, pos, theta, parent, cost, euclidean):
+    def __init__ (self, pos, theta, parent, cost, euclidean, action = None):
         """
         Initialize node attributes.
         pos: Position coordinates (x, y)
@@ -23,6 +23,7 @@ class createNode :
         self.cost = cost
         self.euclidean = euclidean
         self.total_cost = cost + euclidean
+        self.action = action
 
     # Point of the Node
     def getPos(self):
@@ -51,9 +52,9 @@ red = (0, 0, 255)  # For the obstacle space
 blue = (255, 0, 0)
 
 #Robot Parameters
-robot_radius = 38
-wheel_distance = 140
-dt = 0.25
+robot_radius = 30
+wheel_distance = 356
+dt = 0.2
 
 clearance = int(input("Enter clearance: "))
 
@@ -245,7 +246,11 @@ def move(left, right, node, end_point):
 
     return node_list
 
-# Function to get possible actions (movements) from a given node
+
+
+
+
+#Function to get possible actions (movements) from a given node
 def get_actions(node, wL, wR, final):
     """
     Get possible actions (movements) from a given node.
@@ -254,6 +259,8 @@ def get_actions(node, wL, wR, final):
     for left, right in [(0, wL), (wL, 0), (wL, wL), (0, wR), (wR, 0), (wR, wR), (wL, wR), (wR, wL)]:
         actions.append(move(left, right, node, final))
     return actions
+
+
 
 # Check if point is in the goal threshold
 def reached_goal(point,goal, threshold):
@@ -350,21 +357,49 @@ def draw_exploration(explored_node):
 # Function to calculate and return velocity for each point in the path
 def get_velocity(path):
     velocity = []
-    for i in range(len(path)):
-        Xn = path[i][0] - path[i-1][0]
-        Yn = path[i][1] - path[i-1][1]
+    for i in range(1, len(path)):
+        Xn = (path[i][0] - path[i-1][0])/1.5
+        Yn = (path[i][1] - path[i-1][1])/1.5
 
-        velocity_ = math.sqrt(Xn**2 + Yn**2) / dt
-
+        velocity_ = (math.sqrt(Xn**2 + Yn**2) / dt)/1000
+        velocity.append(0)
         velocity.append(velocity_)
 
     return velocity
+
+
+def pub_ang(backtrack):
+    
+    ang_vel = [0]
+    prev_ang = 0
+    
+    for i in range(1, len(backtrack)):
+        dx = backtrack[i][0] - backtrack[i-1][0]
+        dy = backtrack[i][1] - backtrack[i-1][1]
+        dt = 2
+        
+        if dx == 0 or dy == 0:
+            ang = prev_ang
+        else:
+            ang = math.atan(dy/dx)
+        
+        ang_change = (ang - prev_ang) / dt  
+        
+        ang_vel.append(0)
+        ang_vel.append(ang_change)
+        
+        
+        prev_ang = ang
+        
+        
+    return ang_vel
 
 # Main function
 if __name__ == "__main__":
     draw_scene(clearance)
     print("Start search")
     path, orientation = a_star(initial, final, initial_orientation)
+    orientation = pub_ang(path)
     orientation = [-angle for angle in orientation]
     velocities = get_velocity(path)
     save_values_to_csv(velocities, orientation)
@@ -375,7 +410,6 @@ if __name__ == "__main__":
     cv2.circle(screen, (final[0], final[1]), 10, red, -1)  # Goal node in green
 
     draw_path(path)
-
     # Create a VideoWriter object
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
     out = cv2.VideoWriter('exploration_video.avi', fourcc, 20.0, (screen.shape[1], screen.shape[0]))
