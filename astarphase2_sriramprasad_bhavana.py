@@ -54,7 +54,7 @@ blue = (255, 0, 0)
 #Robot Parameters
 robot_radius = 30
 wheel_distance = 356
-dt = 0.2
+dt = 0.1
 
 clearance = int(input("Enter clearance: "))
 
@@ -368,14 +368,14 @@ def get_velocity(path):
     return velocity
 
 
-def pub_ang(backtrack):
+def orientation_val(path):
     
     ang_vel = [0]
     prev_ang = 0
     
-    for i in range(1, len(backtrack)):
-        dx = backtrack[i][0] - backtrack[i-1][0]
-        dy = backtrack[i][1] - backtrack[i-1][1]
+    for i in range(1, len(path)):
+        dx = path[i][0] - path[i-1][0]
+        dy = path[i][1] - path[i-1][1]
         dt = 2
         
         if dx == 0 or dy == 0:
@@ -399,7 +399,7 @@ if __name__ == "__main__":
     draw_scene(clearance)
     print("Start search")
     path, orientation = a_star(initial, final, initial_orientation)
-    orientation = pub_ang(path)
+    orientation = orientation_val(path)
     orientation = [-angle for angle in orientation]
     velocities = get_velocity(path)
     save_values_to_csv(velocities, orientation)
