@@ -53,8 +53,8 @@ blue = (255, 0, 0)
 
 #Robot Parameters
 robot_radius = 30
-wheel_distance = 356
-dt = 0.1
+wheel_distance = 354
+dt = 0.3
 
 clearance = int(input("Enter clearance: "))
 
@@ -358,8 +358,8 @@ def draw_exploration(explored_node):
 def get_velocity(path):
     velocity = []
     for i in range(1, len(path)):
-        Xn = (path[i][0] - path[i-1][0])/1.5
-        Yn = (path[i][1] - path[i-1][1])/1.5
+        Xn = (path[i][0] - path[i-1][0])/2
+        Yn = (path[i][1] - path[i-1][1])/2
 
         velocity_ = (math.sqrt(Xn**2 + Yn**2) / dt)/1000
         velocity.append(0)
